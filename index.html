@@ -37,51 +37,45 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="active">
-                        <a href="#dashboard">
+                        <a href="#dashboard" id="dashboard-link">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#user">
+                        <a href="#user" id="user-link">
                             <i class="material-icons">person</i>
                             <p>User Profile</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#table">
+                        <a href="#table" id="table-link">
                             <i class="material-icons">content_paste</i>
                             <p>Table List</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#typography">
+                        <a href="#typography" id="typography-link">
                             <i class="material-icons">library_books</i>
                             <p>Typography</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#icons">
+                        <a href="#icons" id="icons-link">
                             <i class="material-icons">bubble_chart</i>
                             <p>Icons</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#maps">
+                        <a href="#maps" id="maps-link">
                             <i class="material-icons">location_on</i>
                             <p>Maps</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#notifications">
+                        <a href="#notifications" id="notifications-link">
                             <i class="material-icons text-gray">notifications</i>
                             <p>Notifications</p>
-                        </a>
-                    </li>
-                    <li class="active-pro">
-                        <a href="upgrade">
-                            <i class="material-icons">unarchive</i>
-                            <p>Upgrade to PRO</p>
                         </a>
                     </li>
                 </ul>
@@ -194,13 +188,19 @@
       pageNotFound : "error_404"
     });
 
-  /*app.route({
-    view : "view_1",
-    load : "view_xxx.html",
-    onCreate: function() {  },
-    onReady: function() {  }
-  });
-*/
+    $(['dashboard', 'user', 'table', 'typography', 'notifications', 'maps', 'icons']).each(function(index, name){
+      app.route({
+        view : name,
+        load : name+".html",
+        onReady: function(e) {
+          if ($('html').hasClass('nav-open')){
+            $('html').removeClass('nav-open');
+          }
+          $('#'+name+'-link').closest('ul').find('li').removeClass('active')
+          $('#'+name+'-link').closest('li').addClass('active')
+        }
+      });
+    });
   app.run();
 </script>
 
